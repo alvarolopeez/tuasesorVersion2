@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Acceso a Herramientas | Tu Asesor Álvaro</title>
+        <!-- 1. Cargar nuestras fuentes desde Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+        <!-- 2. Cargar Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <!-- 3. Nuestro CSS personalizado -->
+        <link rel="stylesheet" href="assets/css/acceso.css">
+    </head>
+    <body class="flex items-center justify-center min-h-screen">
+        <main class="w-full max-w-md mx-auto p-4">
+            <div class="text-center mb-8">
+                <a href="index.html" class="text-3xl font-bold text-[#2C3E50]">Tu asesor | Álvaro</a>
+            </div>
+            <div class="glass-effect p-8 md:p-12 text-white">
+                <!-- Vista de Iniciar Sesión -->
+                <div id="login-view">
+                    <h1 class="text-2xl font-bold text-center">Acceso Exclusivo</h1>
+                    <p class="text-center mt-2 text-white/80">Inicia sesión o regístrate para usar nuestras herramientas de cálculo.</p>
+                    <form id="login-form" class="mt-8 space-y-6">
+                        <div>
+                            <label for="login-email" class="font-semibold mb-2 block">Correo electrónico</label>
+                            <input
+                                type="email"
+                                id="login-email"
+                                class="form-input"
+                                required
+                            >
+                        </div>
+                        <div>
+                            <label for="login-password" class="font-semibold mb-2 block">Contraseña</label>
+                            <input
+                                type="password"
+                                id="login-password"
+                                class="form-input"
+                                required
+                            >
+                        </div>
+                        <button type="submit" class="btn-submit">Iniciar Sesión</button>
+                    </form>
+                    <p class="text-center mt-6 text-sm">
+                        ¿No tienes una cuenta?
+                        <a href="#" id="show-register" class="font-bold hover:underline">Regístrate aquí</a>
+                    </p>
+                </div>
+                <!-- Vista de Registro -->
+                <div id="register-view" class="hidden">
+                    <h1 class="text-2xl font-bold text-center">Crea tu cuenta</h1>
+                    <p class="text-center mt-2 text-white/80">Es gratis y solo te llevará un minuto.</p>
+                    <form id="register-form" class="mt-8 space-y-6">
+                        <div>
+                            <label for="reg-email" class="font-semibold mb-2 block">Correo electrónico</label>
+                            <input
+                                type="email"
+                                id="reg-email"
+                                class="form-input"
+                                required
+                            >
+                        </div>
+                        <div>
+                            <label for="reg-password" class="font-semibold mb-2 block">Contraseña</label>
+                            <input
+                                type="password"
+                                id="reg-password"
+                                class="form-input"
+                                required
+                            >
+                        </div>
+                        <button type="submit" class="btn-submit">Registrarme</button>
+                    </form>
+                    <p class="text-center mt-6 text-sm">
+                        ¿Ya tienes una cuenta?
+                        <a href="#" id="show-login" class="font-bold hover:underline">Inicia sesión</a>
+                    </p>
+                </div>
+                <p id="error-message" class="text-center text-red-400 mt-4 text-sm"></p>
+            </div>
+        </main>
+        <script type="module" src="assets/js/acceso.js"></script>
+    </body>
+</html>

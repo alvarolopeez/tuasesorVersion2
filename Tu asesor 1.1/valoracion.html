@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Valoración Gratuita | Tu Asesor Álvaro</title>
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+        
+        <script src="https://cdn.tailwindcss.com"></script>
+        
+        <link rel="stylesheet" href="assets/css/index.css">
+        
+        <style>
+            /* Ajustes específicos para la barra de progreso en tu diseño */
+            #progress-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                z-index: 100;
+                background: rgba(255,255,255,0.2);
+            }
+            #progress-bar {
+                height: 100%;
+                background-color: #ef4444; /* Rojo intenso para resaltar */
+                width: 0%;
+                transition: width 0.5s ease;
+            }
+            /* Animación suave para los pasos */
+            .step-content {
+                animation: fadeIn 0.5s ease-out;
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            /* Estilo para las opciones seleccionables */
+            .selectable-card {
+                border: 2px solid transparent;
+                transition: all 0.3s ease;
+            }
+            .selectable-card:hover {
+                background-color: rgba(255,255,255,0.1);
+            }
+            .selectable-card.selected {
+                border-color: #fff;
+                background-color: rgba(255,255,255,0.2);
+            }
+        </style>
+    </head>
+    <body class="min-h-screen flex flex-col justify-between">
+        
+        <div id="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+
+        <div class="background-container"></div>
+
+        <header class="fixed top-0 left-0 right-0 z-50">
+            <div class="header-floating">
+                <nav class="glass-effect px-4 sm:px-6 py-4 flex justify-between items-center">
+                    <div class="font-bold text-xl sm:text-2xl text-white">
+                        <a href="index.html">Tu asesor | Álvaro</a>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-4 text-white font-semibold text-lg">
+                        <a href="index.html" class="nav-link">Volver al Inicio</a>
+                    </div>
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="text-white text-3xl">☰</button>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <div id="mobile-menu" class="hidden fixed inset-0 z-[60]">
+            <div class="glass-effect w-full h-full flex flex-col items-center justify-center relative">
+                <button id="close-menu-button" class="absolute top-6 right-6 text-white text-4xl">×</button>
+                <a href="index.html" class="nav-link text-3xl text-white my-4">Inicio</a>
+                <a href="comprar.html" class="nav-link text-3xl text-white my-4">Comprar</a>
+                <a href="contacto.html" class="nav-link text-3xl text-white my-4">Contacto</a>
+            </div>
+        </div>
+
+        <main class="flex-grow flex items-center justify-center py-32 px-4">
+            <div class="glass-effect p-8 md:p-12 w-full max-w-3xl text-white relative min-h-[500px] flex flex-col justify-center">
+                
+                <a href="index.html" class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </a>
+
+                <form id="multi-step-form">
+                    
+                    <div class="step-content text-center" data-step="1">
+                        <h1 class="text-3xl md:text-4xl font-bold font-montserrat mb-2">Comencemos la valoración</h1>
+                        <p class="text-lg text-gray-300 mb-10">Selecciona el tipo de propiedad</p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="selectable-card glass-effect p-8 rounded-xl cursor-pointer group" onclick="selectOption('type', 'piso', 2)">
+                                <div class="text-5xl mb-4 group-hover:scale-110 transition-transform">🏢</div>
+                                <h3 class="text-xl font-bold">Piso / Ático</h3>
+                            </div>
+                            <div class="selectable-card glass-effect p-8 rounded-xl cursor-pointer group" onclick="selectOption('type', 'casa', 2)">
+                                <div class="text-5xl mb-4 group-hover:scale-110 transition-transform">🏡</div>
+                                <h3 class="text-xl font-bold">Casa / Chalet</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step-content hidden text-center" data-step="2">
+                        <h2 class="text-3xl font-bold font-montserrat mb-4">Ubicación</h2>
+                        <p class="text-gray-300 mb-8">Para comparar con testigos reales de la zona.</p>
+                        
+                        <div class="max-w-md mx-auto space-y-4 text-left">
+                            <div>
+                                <label class="block text-sm font-bold mb-2 text-gray-300">Dirección</label>
+                                <input type="text" id="val-address" class="form-input bg-white/90 text-gray-800" placeholder="Calle y número">
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="w-1/3">
+                                    <label class="block text-sm font-bold mb-2 text-gray-300">C.P.</label>
+                                    <input type="text" id="val-zip" class="form-input bg-white/90 text-gray-800" placeholder="41009">
+                                </div>
+                                <div class="w-2/3">
+                                    <label class="block text-sm font-bold mb-2 text-gray-300">Ciudad</label>
+                                    <input type="text" value="Sevilla" readonly class="form-input bg-gray-300/50 text-gray-600 cursor-not-allowed">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-10 flex justify-center gap-4">
+                            <button type="button" class="btn btn-outline text-white border-white hover:bg-white hover:text-[#2C3E50]" onclick="prevStep(1)">Atrás</button>
+                            <button type="button" class="btn btn-primary bg-[#2C3E50] border-none hover:bg-blue-900" onclick="validateStep2()">Siguiente</button>
+                        </div>
+                    </div>
+
+                    <div class="step-content hidden text-center" data-step="3">
+                        <h2 class="text-3xl font-bold font-montserrat mb-8">Características Básicas</h2>
+                        
+                        <div class="max-w-sm mx-auto mb-8">
+                            <label class="block text-sm font-bold mb-2 text-gray-300">Superficie Construida (m²)</label>
+                            <div class="flex items-center">
+                                <input type="number" id="val-sqm" class="form-input bg-white/90 text-center text-2xl font-bold text-[#2C3E50]" placeholder="0">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-8 max-w-sm mx-auto mb-8">
+                            <div>
+                                <label class="block text-sm font-bold mb-2 text-gray-300">Habitaciones</label>
+                                <div class="flex items-center justify-center bg-white/10 rounded-lg p-1">
+                                    <button type="button" class="px-3 py-1 text-xl hover:text-blue-300" onclick="adjustValue('val-rooms', -1)">-</button>
+                                    <input type="number" id="val-rooms" class="w-10 bg-transparent text-center text-xl font-bold text-white" value="2" readonly>
+                                    <button type="button" class="px-3 py-1 text-xl hover:text-blue-300" onclick="adjustValue('val-rooms', 1)">+</button>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold mb-2 text-gray-300">Baños</label>
+                                <div class="flex items-center justify-center bg-white/10 rounded-lg p-1">
+                                    <button type="button" class="px-3 py-1 text-xl hover:text-blue-300" onclick="adjustValue('val-baths', -1)">-</button>
+                                    <input type="number" id="val-baths" class="w-10 bg-transparent text-center text-xl font-bold text-white" value="1" readonly>
+                                    <button type="button" class="px-3 py-1 text-xl hover:text-blue-300" onclick="adjustValue('val-baths', 1)">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-10 flex justify-center gap-4">
+                            <button type="button" class="btn btn-outline text-white border-white hover:bg-white hover:text-[#2C3E50]" onclick="prevStep(2)">Atrás</button>
+                            <button type="button" class="btn btn-primary bg-[#2C3E50] border-none hover:bg-blue-900" onclick="validateStep3()">Siguiente</button>
+                        </div>
+                    </div>
+
+                    <div class="step-content hidden text-center" data-step="4">
+                        <h2 class="text-3xl font-bold font-montserrat mb-8">Detalles y Estado</h2>
+                        
+                        <div class="max-w-md mx-auto space-y-4 text-left mb-8">
+                            <label class="flex items-center p-3 bg-white/10 hover:bg-white/20 rounded-lg cursor-pointer transition-colors">
+                                <input type="checkbox" id="feat-elevator" class="w-5 h-5 rounded text-blue-600 focus:ring-blue-500">
+                                <span class="ml-3 text-lg">Ascensor</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white/10 hover:bg-white/20 rounded-lg cursor-pointer transition-colors">
+                                <input type="checkbox" id="feat-terrace" class="w-5 h-5 rounded text-blue-600 focus:ring-blue-500">
+                                <span class="ml-3 text-lg">Terraza / Balcón</span>
+                            </label>
+                            <label class="flex items-center p-3 bg-white/10 hover:bg-white/20 rounded-lg cursor-pointer transition-colors">
+                                <input type="checkbox" id="feat-garage" class="w-5 h-5 rounded text-blue-600 focus:ring-blue-500">
+                                <span class="ml-3 text-lg">Plaza de Garaje</span>
+                            </label>
+                        </div>
+
+                        <div class="max-w-md mx-auto text-left mb-8">
+                             <label class="block text-sm font-bold mb-2 text-gray-300">Estado de conservación</label>
+                             <select id="val-condition" class="form-input bg-white/90 text-gray-800 cursor-pointer">
+                                 <option value="reformar">A reformar (Origen)</option>
+                                 <option value="bueno" selected>Buen estado</option>
+                                 <option value="reformado">Reformado recientemente</option>
+                             </select>
+                        </div>
+
+                        <div class="mt-10 flex justify-center gap-4">
+                            <button type="button" class="btn btn-outline text-white border-white hover:bg-white hover:text-[#2C3E50]" onclick="prevStep(3)">Atrás</button>
+                            <button type="button" class="btn btn-primary bg-[#2C3E50] border-none hover:bg-blue-900" onclick="nextStep(5)">Siguiente</button>
+                        </div>
+                    </div>
+
+                    <div class="step-content hidden text-center" data-step="5">
+                        <h2 class="text-3xl font-bold font-montserrat mb-2">Casi terminamos</h2>
+                        <p class="text-gray-300 mb-8">Verifique su número para ver la valoración en pantalla inmediatamente.</p>
+
+                        <div class="max-w-md mx-auto space-y-4 text-left">
+                            <div class="grid grid-cols-2 gap-4">
+                                 <input type="text" id="contact-name" class="form-input bg-white/90 text-gray-800" placeholder="Nombre" required>
+                                 <input type="text" id="contact-surname" class="form-input bg-white/90 text-gray-800" placeholder="Apellidos">
+                            </div>
+                            <input type="email" id="contact-email" class="form-input bg-white/90 text-gray-800" placeholder="Correo electrónico" required>
+                            
+                            <div class="flex">
+                                <span class="inline-flex items-center px-3 text-gray-500 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md">
+                                    🇪🇸 +34
+                                </span>
+                                <input type="tel" id="contact-phone" class="form-input rounded-l-none bg-white/90 text-gray-800" placeholder="600 000 000" required>
+                            </div>
+                            
+                            <div id="recaptcha-container"></div>
+
+                            <div id="sms-code-container" class="hidden mt-4 p-4 bg-white/10 rounded-lg text-center border border-white/20 animate-pulse">
+                                <p class="text-sm text-white mb-2">Código SMS enviado:</p>
+                                <input type="text" id="sms-code" class="form-input text-center text-2xl font-bold tracking-[0.5em] text-gray-800" placeholder="123456" maxlength="6">
+                            </div>
+                        </div>
+
+                        <div class="mt-8">
+                            <button type="button" id="send-sms-btn" class="w-full btn btn-submit font-bold py-3 text-lg shadow-xl">
+                                Obtener Valoración Ahora
+                            </button>
+                             <button type="button" id="verify-code-btn" class="hidden w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded shadow-xl transition-colors">
+                                Verificar Código y Ver Precio
+                            </button>
+                        </div>
+                         <p class="text-xs text-gray-400 mt-4">Respetamos su privacidad. Sin spam.</p>
+                    </div>
+
+                    <div class="step-content hidden text-center" data-step="6">
+                        
+                        <div id="result-macarena" class="hidden">
+                            <div class="mb-6 inline-block p-4 bg-white/10 rounded-full border border-white/20">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-sm font-bold text-gray-400 uppercase tracking-widest mb-2">VALOR DE MERCADO ESTIMADO</h3>
+                            
+                            <div class="text-4xl sm:text-6xl font-bold font-montserrat text-white mb-6" id="price-range-display">
+                                </div>
+                            
+                            <p class="text-gray-300 mb-8 max-w-md mx-auto text-lg">
+                                Basado en ventas recientes en <strong class="text-white">La Macarena</strong>.
+                            </p>
+
+                            <div class="bg-white/10 p-6 rounded-lg text-left text-sm text-gray-200 max-w-lg mx-auto border border-white/10">
+                                <p class="mb-2">✅ <strong>Informe enviado:</strong> Revise su correo <span id="res-email"></span>.</p>
+                                <p>Esta es una estimación algorítmica. Para un precio de cierre exacto, uno de nuestros expertos locales le contactará pronto.</p>
+                            </div>
+                        </div>
+
+                        <div id="result-manual" class="hidden">
+                            <h3 class="text-2xl font-bold font-montserrat text-white mb-4">Valoración Manual Requerida</h3>
+                            <p class="text-lg text-gray-300 mb-8 max-w-lg mx-auto">
+                                Su propiedad tiene características únicas. Para no darle un dato erróneo, preferimos analizarlo personalmente.
+                            </p>
+                             <div class="p-4 bg-green-500/20 border border-green-500 text-green-100 rounded mb-6">
+                                ✅ Solicitud recibida correctamente
+                             </div>
+                             <p class="text-gray-400">Álvaro se pondrá en contacto con usted en breve con el estudio detallado.</p>
+                        </div>
+                        
+                        <a href="index.html" class="mt-12 inline-block btn btn-outline text-white border-white hover:bg-white hover:text-black">Volver al inicio</a>
+                    </div>
+
+                </form>
+            </div>
+        </main>
+
+        <footer class="bg-[#2C3E50] text-white relative z-50">
+            <div class="container mx-auto px-4 py-16">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+                    <div>
+                        <h3 class="font-bold text-2xl">Tu asesor | Álvaro</h3>
+                        <p class="mt-4 text-gray-400">Acompañándote en el proceso de compra o venta de tu hogar en Sevilla.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Navegación</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="comprar.html" class="hover:text-white">Comprar</a></li>
+                            <li><a href="valoracion.html" class="hover:text-white">Vender</a></li>
+                            <li><a href="index.html#services" class="hover:text-white">Servicios</a></li>
+                            <li><a href="blog.html" class="hover:text-white">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Contacto</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="tel:+34697223944" class="hover:text-white">+34 697 223 944</a></li>
+                            <li><a href="mailto:hola@tuasesoralvaro.com" class="hover:text-white">tuasesoralvaro@gmail.com</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Ubicación</h4>
+                        <p class="text-gray-400 text-sm">Sevilla, España</p>
+                    </div>
+                </div>
+                <div class="mt-12 pt-8 border-t border-gray-700 text-center text-gray-500 text-sm">
+                    <p>© 2025 Tu Asesor | Álvaro. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </footer>
+
+        <script type="module" src="assets/js/valoracion.js"></script>
+        
+        <script>
+            const menuBtn = document.getElementById('mobile-menu-button');
+            const closeMenuBtn = document.getElementById('close-menu-button');
+            const menu = document.getElementById('mobile-menu');
+            
+            if(menuBtn) menuBtn.addEventListener('click', () => menu.classList.remove('hidden'));
+            if(closeMenuBtn) closeMenuBtn.addEventListener('click', () => menu.classList.add('hidden'));
+        </script>
+
+    </body>
+</html>

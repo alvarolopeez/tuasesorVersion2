@@ -1,0 +1,15 @@
+{
+  "name": "Tu Asesor | Álvaro",
+  "short_name": "Asesor",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "https://elcuartoinmobiliaria.com/wp-content/uploads/2025/06/cropped-Favicon-Elcuarto-1-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    }
+  ]
+}

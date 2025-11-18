@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>CMS Inmobiliaria - Admin</title>
+        <link rel="icon" href="https://elcuartoinmobiliaria.com/wp-content/uploads/2025/06/cropped-Favicon-Elcuarto-1-32x32.png" sizes="32x32">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+        <link rel="stylesheet" href="assets/css/admin.css">
+    </head>
+    <body class="bg-gray-100">
+        <div id="login-container" class="flex items-center justify-center min-h-screen">
+            <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+                <h1 class="text-2xl font-bold text-center text-gray-800">Acceso al Panel</h1>
+                <form id="login-form" class="space-y-6">
+                    <div>
+                        <label for="email" class="font-semibold text-sm">Correo electrónico</label>
+                        <input
+                            type="email"
+                            id="email"
+                            required
+                            class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                        >
+                    </div>
+                    <div>
+                        <label for="password" class="font-semibold text-sm">Contraseña</label>
+                        <input
+                            type="password"
+                            id="password"
+                            required
+                            class="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                        >
+                    </div>
+                    <button type="submit" class="w-full px-4 py-2 font-bold text-white bg-blue-600 rounded-md hover:bg-blue-700">Iniciar Sesión</button>
+                    <p id="login-error" class="text-xs text-red-500 text-center"></p>
+                </form>
+            </div>
+        </div>
+        <div id="admin-panel" class="hidden">
+            <div class="flex h-screen bg-gray-100">
+                <aside class="w-64 bg-white shadow-md flex-shrink-0">
+                    <div class="p-4 border-b">
+                        <h2 class="text-xl font-bold text-gray-800">CMS Inmobiliaria</h2>
+                    </div>
+                    <nav id="sidebar-nav" class="mt-4">
+                        <a href="#" data-section="dashboard" class="nav-link block px-4 py-2 text-gray-600 hover:bg-gray-200 active">Dashboard</a>
+                        <a href="#" data-section="properties" class="nav-link block px-4 py-2 text-gray-600 hover:bg-gray-200">Inmuebles</a>
+                        <a href="#" data-section="reviews" class="nav-link block px-4 py-2 text-gray-600 hover:bg-gray-200">Reseñas</a>
+                        <a href="#" data-section="blog" class="nav-link block px-4 py-2 text-gray-600 hover:bg-gray-200">Blog</a>
+                        <a href="#" data-section="valuations" class="nav-link block px-4 py-2 text-gray-600 hover:bg-gray-200">Solicitudes Valoración</a>
+                        <a href="#" data-section="buyers" class="nav-link block px-4 py-2 text-gray-600 hover:bg-gray-200">Contactos Compradores</a>
+                        <a href="#" data-section="valuation-config" class="nav-link block px-4 py-2 font-bold text-green-600 hover:bg-green-100">💰 Config. Valoración</a>
+                    </nav>
+                </aside>
+                <div class="flex-1 flex flex-col overflow-hidden">
+                    <header class="bg-white shadow-sm">
+                        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+                            <h1 id="section-title" class="text-xl font-bold text-gray-800">Dashboard</h1>
+                            <div class="flex items-center gap-4">
+                                <span id="admin-email" class="text-sm text-gray-600"></span>
+                                <button id="logout-button" class="px-4 py-2 text-sm font-semibold text-white bg-red-500 rounded-md hover:bg-red-600">Cerrar Sesión</button>
+                            </div>
+                        </div>
+                    </header>
+                    <main class="flex-1 p-6 overflow-y-auto">
+                        <div id="dashboard-section" class="section-content">
+                            <h3 class="text-2xl font-bold">¡Bienvenido, Álvaro!</h3>
+                            <p class="mt-2 text-gray-600">Desde aquí podrás gestionar todo el contenido de tu web.</p>
+                        </div>
+                        <div id="properties-section" class="section-content hidden">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-2xl font-bold">Gestión de Inmuebles</h3>
+                                <button id="add-property-btn" class="px-4 py-2 font-bold text-white bg-blue-600 rounded-md hover:bg-blue-700">Añadir Inmueble</button>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow overflow-x-auto">
+                                <table class="w-full">
+                                    <thead>
+                                        <tr class="border-b">
+                                            <th class="text-left p-2 font-semibold">Título</th>
+                                            <th class="text-left p-2 font-semibold">Precio</th>
+                                            <th class="text-left p-2 font-semibold">Operación</th>
+                                            <th class="text-left p-2 font-semibold">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="properties-table-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="reviews-section" class="section-content hidden">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-2xl font-bold">Gestión de Reseñas</h3>
+                                <button id="add-review-btn-cms" class="px-4 py-2 font-bold text-white bg-blue-600 rounded-md hover:bg-blue-700">Añadir Reseña</button>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow overflow-x-auto">
+                                <table class="w-full">
+                                    <thead>
+                                        <tr class="border-b">
+                                            <th class="text-left p-2 font-semibold">Nombre</th>
+                                            <th class="text-left p-2 font-semibold">Valoración</th>
+                                            <th class="text-left p-2 font-semibold">Reseña</th>
+                                            <th class="text-left p-2 font-semibold">Aprobada</th>
+                                            <th class="text-left p-2 font-semibold">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="reviews-table-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="blog-section" class="section-content hidden">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-2xl font-bold">Gestión del Blog</h3>
+                                <button id="add-post-btn" class="px-4 py-2 font-bold text-white bg-blue-600 rounded-md hover:bg-blue-700">Nueva Entrada</button>
+                            </div>
+                            <div class="bg-white p-4 rounded-lg shadow overflow-x-auto">
+                                <table class="w-full">
+                                    <thead>
+                                        <tr class="border-b">
+                                            <th class="text-left p-2 font-semibold">Título</th>
+                                            <th class="text-left p-2 font-semibold">Fecha</th>
+                                            <th class="text-left p-2 font-semibold">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="posts-table-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="valuations-section" class="section-content hidden">
+                            <h3 class="text-2xl font-bold mb-6">Solicitudes de Valoración</h3>
+                            <div class="bg-white p-4 rounded-lg shadow overflow-x-auto">
+                                <table class="w-full" id="valuations-table">
+                                    <thead>
+                                        <tr class="border-b">
+                                            <th class="p-2 font-semibold text-left">Nombre</th>
+                                            <th class="p-2 font-semibold text-left">Email / Teléfono</th>
+                                            <th class="p-2 font-semibold text-left">Detalles del Inmueble</th>
+                                            <th class="p-2 font-semibold text-left">Fecha</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="buyers-section" class="section-content hidden">
+                            <h3 class="text-2xl font-bold mb-6">Contactos de Compradores</h3>
+                            <div class="bg-white p-4 rounded-lg shadow overflow-x-auto">
+                                <table class="w-full" id="buyers-table">
+                                    <thead>
+                                        <tr class="border-b"></tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div id="valuation-config-section" class="section-content hidden">
+                            <h3 class="text-2xl font-bold mb-4">Editor de Zonas y Precios (VMS)</h3>
+                            <p class="text-gray-600 mb-6">Dibuja polígonos sobre el mapa para asignar un precio base por m² a esa micro-zona.</p>
+    
+                            <div id="map-editor" class="bg-white p-4 rounded-lg shadow" style="height: 600px;"></div>
+
+                            <div class="mt-8">
+                                <h4 class="text-xl font-bold mb-4">Zonas Creadas</h4>
+                                <div id="zone-list-container" class="bg-white p-4 rounded-lg shadow">
+                                    <p id="loading-zones" class="text-center text-gray-500">Cargando zonas...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="zone-modal" class="hidden fixed inset-0 modal-bg z-50 flex items-center justify-center p-4">
+                            <div class="bg-white rounded-lg shadow-xl w-full max-w-xl">
+                                 <div class="p-6 border-b flex justify-between items-center bg-blue-50">
+                                    <h3 id="zone-modal-title" class="text-xl font-bold text-blue-800">Definir Precios del Polígono</h3>
+                                    <button id="close-zone-modal-btn" class="text-2xl text-gray-700">&times;</button>
+                                </div>
+                                <form id="zone-form" class="p-6 space-y-4">
+                                    <input type="hidden" id="zone-id">
+                                    <input type="hidden" id="zone-geometry">
+            
+                                    <div>
+                                        <label for="zone-name" class="font-semibold text-sm">Nombre de la Zona (Ej: Macarena - Pío XII)</label>
+                                        <input type="text" id="zone-name" required class="input-base">
+                                    </div>
+            
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="base-price" class="font-semibold text-sm">Precio Base por m² (€)</label>
+                                            <input type="number" id="base-price" required class="input-base" placeholder="Ej: 1850">
+                                        </div>
+                                    <div>
+                                        <label for="avg-sqm" class="font-semibold text-sm">M² promedio de referencia</label>
+                                        <input type="number" id="avg-sqm" class="input-base" placeholder="Ej: 75">
+                                    </div>
+                                </div>
+
+                                <h4 class="font-bold pt-2 border-t mt-4">Factores de Corrección (%)</h4>
+                                <p class="text-sm text-gray-500 mb-2">Define el porcentaje que se sumará o restará a la valoración si se cumple la condición.</p>
+            
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="corr-elevator" class="font-semibold text-sm">Ascensor (+/- %)</label>
+                                        <input type="number" id="corr-elevator" class="input-base" placeholder="Ej: 10 (para +10%)">
+                                    </div>
+                                <div>
+                                    <label for="corr-garage" class="font-semibold text-sm">Garaje (+/- %)</label>
+                                    <input type="number" id="corr-garage" class="input-base" placeholder="Ej: 8 (para +8%)">
+                                </div>
+                                <div>
+                                    <label for="corr-reformar" class="font-semibold text-sm">A Reformar (+/- %)</label>
+                                    <input type="number" id="corr-reformar" class="input-base" placeholder="Ej: -20 (para -20%)">
+                                </div>
+                                <div>
+                                    <label for="corr-reformado" class="font-semibold text-sm">Reformado (+/- %)</label>
+                                    <input type="number" id="corr-reformado" class="input-base" placeholder="Ej: 15 (para +15%)">
+                                </div>
+                            </div>
+
+                            <div class="pt-4 flex justify-end space-x-4 border-t">
+                                <button type="button" id="cancel-zone-btn" class="px-4 py-2 font-bold text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300">Cancelar</button>
+                                <button type="submit" id="save-zone-btn" class="px-4 py-2 font-bold text-white bg-green-600 rounded-md hover:bg-green-700">Guardar Zona</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+        <div id="property-modal" class="hidden fixed inset-0 modal-bg z-50 flex items-center justify-center p-4">
+            <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col">
+                <div class="p-6 border-b flex justify-between items-center">
+                    <h3 id="modal-title" class="text-2xl font-bold">Añadir Inmueble</h3>
+                    <button id="close-modal-btn" class="text-2xl">&times;</button>
+                </div>
+                <form id="property-form" class="p-6 space-y-4 overflow-y-auto">
+                    <input type="hidden" id="property-id">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label for="title" class="font-semibold text-sm">Título</label>
+                            <input
+                                type="text"
+                                id="title"
+                                required
+                                class="input-base"
+                            >
+                        </div>
+                        <div>
+                            <label for="price" class="font-semibold text-sm">Precio (€)</label>
+                            <input
+                                type="number"
+                                id="price"
+                                required
+                                class="input-base"
+                            >
+                        </div>
+                        <div>
+                            <label for="sqm" class="font-semibold text-sm">Metros (m²)</label>
+                            <input
+                                type="number"
+                                id="sqm"
+                                required
+                                class="input-base"
+                            >
+                        </div>
+                        <div>
+                            <label for="beds" class="font-semibold text-sm">Habitaciones</label>
+                            <input
+                                type="number"
+                                id="beds"
+                                required
+                                class="input-base"
+                            >
+                        </div>
+                        <div>
+                            <label for="baths" class="font-semibold text-sm">Baños</label>
+                            <input
+                                type="number"
+                                id="baths"
+                                required
+                                class="input-base"
+                            >
+                        </div>
+                        <div>
+                            <label for="tag" class="font-semibold text-sm">Etiqueta</label>
+                            <input type="text" id="tag" class="input-base">
+                        </div>
+                        <div>
+                            <label for="operation" class="font-semibold text-sm">Operación</label>
+                            <select id="operation" class="input-base">
+                                <option value="comprar">Comprar</option>
+                                <option value="alquilar">Alquilar</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="type" class="font-semibold text-sm">Tipo</label>
+                            <select id="type" class="input-base">
+                                <option value="piso">Piso</option>
+                                <option value="casa">Casa</option>
+                                <option value="local">Local</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="font-semibold text-sm">Descripción</label>
+                        <div id="property-quill-editor" class="mt-1"></div>
+                    </div>
+                    <div>
+                        <label class="font-semibold text-sm">Imágenes (la 1ª es la portada)</label>
+                        <input
+                            type="file"
+                            id="images"
+                            class="w-full mt-1 text-sm"
+                            multiple
+                            accept="image/*"
+                        >
+                        <div id="image-previews" class="mt-4 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-4"></div>
+                    </div>
+                    <div class="pt-4 flex justify-end space-x-4 border-t">
+                        <button type="button" id="cancel-btn" class="px-4 py-2 font-bold text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300">Cancelar</button>
+                        <button type="submit" id="save-property-btn" class="px-4 py-2 font-bold text-white bg-blue-600 rounded-md hover:bg-blue-700">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="post-modal" class="hidden fixed inset-0 modal-bg z-50 flex items-center justify-center p-4">
+            <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col">
+                <div class="p-6 border-b flex justify-between items-center">
+                    <h3 id="post-modal-title" class="text-2xl font-bold">Nueva Entrada de Blog</h3>
+                    <button id="close-post-modal-btn" class="text-2xl">&times;</button>
+                </div>
+                <form id="post-form" class="p-6 space-y-4 overflow-y-auto">
+                    <input type="hidden" id="post-id">
+                    <div>
+                        <label for="post-title-input" class="font-semibold text-sm">Título</label>
+                        <input
+                            type="text"
+                            id="post-title-input"
+                            required
+                            class="input-base"
+                        >
+                    </div>
+                    <div>
+                        <label class="font-semibold text-sm">Tipo de Editor</label>
+                        <div class="mt-2 flex gap-2">
+                            <button type="button" id="editor-mode-rich" class="px-3 py-1 text-sm rounded bg-blue-600 text-white">Editor Visual</button>
+                            <button type="button" id="editor-mode-html" class="px-3 py-1 text-sm rounded bg-gray-200 text-gray-700">HTML</button>
+                        </div>
+                    </div>
+                    <div id="editor-rich-container">
+                        <label class="font-semibold text-sm">Contenido</label>
+                        <div id="post-quill-editor" class="mt-1"></div>
+                    </div>
+                    <div id="editor-html-container" class="hidden">
+                        <label class="font-semibold text-sm">Contenido (HTML)</label>
+                        <textarea id="post-html-editor" class="input-base h-40 font-mono"></textarea>
+                    </div>
+                    <div>
+                        <label for="post-image-input" class="font-semibold text-sm">Imagen Destacada</label>
+                        <input
+                            type="file"
+                            id="post-image-input"
+                            class="w-full mt-1 text-sm"
+                            accept="image/*"
+                        >
+                        <div id="post-image-preview" class="mt-2"></div>
+                    </div>
+                    <div class="pt-4 flex justify-end space-x-4 border-t">
+                        <button type="button" id="cancel-post-btn" class="px-4 py-2 font-bold text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300">Cancelar</button>
+                        <button type="submit" id="save-post-btn" class="px-4 py-2 font-bold text-white bg-blue-600 rounded-md hover:bg-blue-700">Guardar Entrada</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="review-modal" class="hidden fixed inset-0 modal-bg z-50 flex items-center justify-center p-4">
+            <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+                <div class="p-6 border-b flex justify-between items-center">
+                    <h3 id="review-modal-title" class="text-2xl font-bold">Añadir Reseña</h3>
+                    <button id="close-review-modal-btn" class="text-2xl">&times;</button>
+                </div>
+                <form id="review-form-cms" class="p-6 space-y-4 overflow-y-auto">
+                    <input type="hidden" id="review-id">
+                    <div>
+                        <label for="review-name-cms" class="font-semibold text-sm">Nombre del Cliente</label>
+                        <input
+                            type="text"
+                            id="review-name-cms"
+                            required
+                            class="input-base"
+                        >
+                    </div>
+                    <div>
+                        <label for="review-rating-cms" class="font-semibold text-sm">Valoración (de 1 a 5)</label>
+                        <select id="review-rating-cms" class="input-base">
+                            <option value="5">5 estrellas</option>
+                            <option value="4">4 estrellas</option>
+                            <option value="3">3 estrellas</option>
+                            <option value="2">2 estrellas</option>
+                            <option value="1">1 estrella</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="review-text-cms" class="font-semibold text-sm">Texto de la reseña</label>
+                        <textarea
+                            id="review-text-cms"
+                            required
+                            class="input-base"
+                            rows="5"
+                        ></textarea>
+                    </div>
+                    <div class="flex items-center">
+                        <label for="review-approved-cms" class="font-semibold text-sm mr-4">Aprobada (visible en la web)</label>
+                        <label class="switch">
+                            <input type="checkbox" id="review-approved-cms">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="pt-4 flex justify-end space-x-4 border-t">
+                        <button type="button" id="cancel-review-btn" class="px-4 py-2 font-bold text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300">Cancelar</button>
+                        <button type="submit" id="save-review-btn" class="px-4 py-2 font-bold text-white bg-blue-600 rounded-md hover:bg-blue-700">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script> 
+        <script type="module" src="assets/js/admin.js"></script>
+    </body>
+</html>

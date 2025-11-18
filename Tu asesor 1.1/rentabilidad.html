@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calculadora de Rentabilidad PRO | Tu Asesor Álvaro</title>
+        <link rel="icon" href="https://elcuartoinmobiliaria.com/wp-content/uploads/2025/06/cropped-Favicon-Elcuarto-1-32x32.png" sizes="32x32">
+        <!-- 1. Cargar nuestras fuentes desde Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+        <!-- 2. Cargar Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <!-- Cargar Chart.js y el plugin para etiquetas -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+        <!-- 3. Nuestro CSS personalizado -->
+        <link rel="stylesheet" href="assets/css/rentabilidad.css">
+    </head>
+    <body class="min-h-screen">
+        <!-- ==== INICIO DEL ENCABEZADO (Reutilizado) ==== -->
+        <header class="sticky top-0 left-0 right-0 z-50">
+            <div class="header-floating">
+                <nav class="glass-effect px-4 sm:px-6 py-4 flex justify-between items-center">
+                    <div class="font-bold text-xl sm:text-2xl text-white">
+                        <a href="index.html">Tu asesor | Álvaro</a>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-4 text-white font-semibold text-lg">
+                        <a href="index.html" class="nav-link">Comprar</a>
+                        <a href="index.html#valuation" class="nav-link">Vender</a>
+                        <div class="relative group">
+                            <button class="nav-link flex items-center">
+                                Servicios
+                                <svg
+                                    class="w-4 h-4 ml-1"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M19 9l-7 7-7-7"
+                                    ></path>
+                                </svg>
+                            </button>
+                            <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-64 hidden group-hover:block transition-all duration-300">
+                                <div class="glass-effect rounded-lg shadow-xl p-2">
+                                    <a href="index.html#services" class="block w-full text-left px-4 py-2 rounded-md hover:bg-white/20">Nuestros Servicios</a>
+                                    <a href="plusvalia.html" class="block w-full text-left px-4 py-2 rounded-md hover:bg-white/20">Calculadora de Plusvalía</a>
+                                    <a href="rentabilidad.html" class="block w-full text-left px-4 py-2 rounded-md hover:bg-white/20">Calculadora de Rentabilidad</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="blog.html" class="nav-link">Blog</a>
+                    </div>
+                    <div class="hidden md:block">
+                        <a href="contacto.html" class="btn btn-primary">Contáctanos</a>
+                    </div>
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="text-white text-3xl">☰</button>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- ==== FIN DEL ENCABEZADO ==== -->
+        <!-- ==== INICIO MENÚ MÓVIL (Reutilizado) ==== -->
+        <div id="mobile-menu" class="hidden fixed inset-0 z-[60]">
+            <div class="glass-effect w-full h-full flex flex-col items-center justify-center">
+                <button id="close-menu-button" class="absolute top-6 right-6 text-white text-4xl">×</button>
+                <a href="comprar.html" class="nav-link text-3xl text-white my-4">Comprar</a>
+                <a href="index.html#valuation" class="nav-link text-3xl text-white my-4">Vender</a>
+                <a href="index.html#services" class="nav-link text-3xl text-white my-4">Servicios</a>
+                <a href="#valuation" class="nav-link text-3xl text-white my-4">Vender</a>
+                <div class="text-center">
+                    <a href="#services" class="nav-link text-3xl text-white my-4 block">Servicios</a>
+                    <a href="plusvalia.html" class="text-xl text-white my-2 block hover:underline">Calculadora de Plusvalía</a>
+                    <a href="rentabilidad.html" class="text-xl text-white my-2 block hover:underline">Calculadora de Rentabilidad</a>
+                </div>
+                <a href="contacto.html" class="nav-link text-3xl text-white my-4">Contacto</a>
+                <a href="blog.html" class="nav-link text-3xl text-white my-4">Blog</a>
+            </div>
+        </div>
+        <!-- ==== FIN MENÚ MÓVIL ==== -->
+        <main class="py-24 sm:py-32">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h1 class="text-3xl sm:text-5xl font-bold text-[#2C3E50]">Simulador de Inversión Inmobiliaria</h1>
+                    <p class="mt-4 text-lg sm:text-xl max-w-3xl mx-auto text-[#3e576c]">Una herramienta profesional para analizar la rentabilidad de una propiedad en alquiler, incluyendo financiación, impuestos y gastos.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                    <!-- Columna Izquierda: Entradas de Datos -->
+                    <div class="lg:col-span-2 glass-effect p-6 md:p-8 space-y-6 self-start">
+                        <!-- Datos de Compra -->
+                        <div>
+                            <h3 class="text-xl font-bold text-white border-b border-white/20 pb-2 mb-4">1. Datos de Compraventa</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="precio-compra" class="form-label">Precio Compra</label>
+                                    <div class="input-group">
+                                        <input
+                                            type="number"
+                                            id="precio-compra"
+                                            value="120000"
+                                            class="form-input"
+                                        >
+                                        <span class="input-group-text">€</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="coste-reforma" class="form-label">Reforma</label>
+                                    <div class="input-group">
+                                        <input
+                                            type="number"
+                                            id="coste-reforma"
+                                            value="5000"
+                                            class="form-input"
+                                        >
+                                        <span class="input-group-text">€</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="comunidad-autonoma" class="form-label">Com. Autónoma</label>
+                                    <select id="comunidad-autonoma" class="form-input"></select>
+                                </div>
+                                <div>
+                                    <label for="gastos-notaria" class="form-label">Notaría</label>
+                                    <div class="input-group">
+                                        <input
+                                            type="number"
+                                            id="gastos-notaria"
+                                            value="600"
+                                            class="form-input"
+                                        >
+                                        <span class="input-group-text">€</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="gastos-registro" class="form-label">Registro</label>
+                                    <div class="input-group">
+                                        <input
+                                            type="number"
+                                            id="gastos-registro"
+                                            value="400"
+                                            class="form-input"
+                                        >
+                                        <span class="input-group-text">€</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="gastos-gestoria" class="form-label">Gestoría</label>
+                                    <div class="input-group">
+                                        <input
+                                            type="number"
+                                            id="gastos-gestoria"
+                                            value="300"
+                                            class="form-input"
+                                        >
+                                        <span class="input-group-text">€</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Financiación -->
+                        <div>
+                            <div class="flex justify-between items-center border-b border-white/20 pb-2 mb-4">
+                                <h3 class="text-xl font-bold text-white">2. Financiación</h3>
+                                <label class="switch">
+                                    <input type="checkbox" id="toggle-hipoteca" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div id="hipoteca-inputs" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="gastos-tasacion" class="form-label">Tasación</label>
+                                    <div class="input-group">
+                                        <input
+                                            type="number"
+                                            id="gastos-tasacion"
+                                            value="300"
+                                            class="form-input"
+                                        >
+                                        <span class="input-group-text">€</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="porcentaje-financiado" class="form-label">% Financiado</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input
+                                            type="range"
+                                            id="porcentaje-financiado"
+                                            min="0"
+                                            max="100"
+                                            value="80"
+                                            class="w-full"
+                                        >
+                                        <span id="porcentaje-financiado-valor" class="text-white font-bold w-12 text-center">80%</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="tipo-interes" class="form-label">Interés Anual</label>
+                                    <div class="input-group">
+                                        <input
+                                            type="number"
+                                            step="0.01"
+                                            id="tipo-interes"
+                                            value="3.5"
+                                            class="form-input"
+                                        >
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="plazo-hipoteca" class="form-label">Plazo (Años)</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input
+                                            type="range"
+                                            id="plazo-hipoteca"
+                                            min="5"
+                                            max="40"
+                                            value="30"
+                                            class="w-full"
+                                        >
+                                        <span id="plazo-hipoteca-valor" class="text-white font-bold w-12 text-center">30a</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Alquiler -->
+                        <div>
+                            <h3 class="text-xl font-bold text-white border-b border-white/20 pb-2 mb-4">3. Alquiler e Impuestos</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="alquiler-mensual" class="form-label">Alquiler Mensual</label>
+                                    <div class="input-group">
+                                        <input
+                                            type="number"
+                                            id="alquiler-mensual"
+                                            value="750"
+                                            class="form-input"
+                                        >
+                                        <span class="input-group-text">€</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="gastos-comunidad" class="form-label">Comunidad (Anual)</label>
+                                    <div class="input-group">
+                                        <input
+                                            type="number"
+                                            id="gastos-comunidad"
+                                            value="600"
+                                            class="form-input"
+                                        >
+                                        <span class="input-group-text">€</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="gastos-ibi" class="form-label">IBI (Anual)</label>
+                                    <div class="input-group">
+                                        <input
+                                            type="number"
+                                            id="gastos-ibi"
+                                            value="350"
+                                            class="form-input"
+                                        >
+                                        <span class="input-group-text">€</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="gastos-seguro-hogar" class="form-label">Seguro Hogar (Anual)</label>
+                                    <div class="input-group">
+                                        <input
+                                            type="number"
+                                            id="gastos-seguro-hogar"
+                                            value="250"
+                                            class="form-input"
+                                        >
+                                        <span class="input-group-text">€</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="gastos-mantenimiento" class="form-label">Mantenimiento (Anual)</label>
+                                    <div class="input-group">
+                                        <input
+                                            type="number"
+                                            id="gastos-mantenimiento"
+                                            value="300"
+                                            class="form-input"
+                                        >
+                                        <span class="input-group-text">€</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="gastos-seguro-impago" class="form-label">Seguro Impago (Anual)</label>
+                                    <div class="input-group">
+                                        <input
+                                            type="number"
+                                            id="gastos-seguro-impago"
+                                            value="400"
+                                            class="form-input"
+                                        >
+                                        <span class="input-group-text">€</span>
+                                    </div>
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label for="tramo-irpf-general" class="form-label">Tu Salario Bruto Anual (para IRPF)</label>
+                                    <select id="tramo-irpf-general" class="form-input">
+                                        <option value="0">0€ - 12.450€</option>
+                                        <option value="12450">12.450€ - 20.200€</option>
+                                        <option value="20200" selected>20.200€ - 35.200€</option>
+                                        <option value="35200">35.200€ - 60.000€</option>
+                                        <option value="60000">Más de 60.000€</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Columna Derecha: Resultados y Gráficos -->
+                    <div class="lg:col-span-3 space-y-8">
+                        <div class="glass-effect p-6 text-white">
+                            <h3 class="text-xl font-bold mb-4 text-center">Métricas Clave de la Inversión</h3>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                                <div>
+                                    <div class="text-2xl md:text-3xl font-bold" id="rentabilidad-neta-kpi">-</div>
+                                    <div class="text-sm opacity-80">Rentabilidad Neta</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl md:text-3xl font-bold" id="roi-kpi">-</div>
+                                    <div class="text-sm opacity-80">ROI (Cash-on-Cash)</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl md:text-3xl font-bold" id="cashflow-kpi">-</div>
+                                    <div class="text-sm opacity-80">Cashflow Mensual</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl md:text-3xl font-bold" id="inversion-kpi">-</div>
+                                    <div class="text-sm opacity-80">Aportación Inicial</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="glass-effect p-6 text-white space-y-3">
+                            <h3 class="text-xl font-bold text-center">Resumen Financiero del Primer Año</h3>
+                            <div class="flex justify-between border-t border-white/20 pt-2">
+                                <span class="opacity-80">Ingresos Anuales por Alquiler</span>
+                                <span id="out-ingresos" class="font-bold"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="opacity-80">Gastos Anuales (Fijos + Hipoteca)</span>
+                                <span id="out-gastos-anuales" class="font-bold text-yellow-300"></span>
+                            </div>
+                            <div class="flex justify-between border-t border-white/20 pt-2">
+                                <span class="opacity-80 font-semibold">Beneficio Bruto (antes de impuestos)</span>
+                                <span id="out-beneficio-bruto" class="font-bold"></span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="opacity-80 pl-4">Base Imponible IRPF (con reducción del 60%)</span>
+                                <span id="out-base-irpf" class="font-bold"></span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="opacity-80 pl-4">Tipo Impositivo IRPF Aplicado</span>
+                                <span id="out-tipo-irpf" class="font-bold"></span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="opacity-80">Impuestos (IRPF) a Pagar</span>
+                                <span id="out-irpf" class="font-bold text-yellow-300"></span>
+                            </div>
+                            <div class="flex justify-between font-bold text-lg border-t border-white/20 pt-2">
+                                <span>Beneficio Neto Anual (Cashflow)</span>
+                                <span id="out-beneficio-neto" class="text-green-300"></span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="glass-effect p-4 h-[350px]">
+                                <canvas id="inversionChart"></canvas>
+                            </div>
+                            <div class="glass-effect p-4 h-[350px]">
+                                <canvas id="cashflowChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="glass-effect p-4 h-[350px]">
+                            <canvas id="hipotecaChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- ==== PIE DE PÁGINA (Reutilizado) ==== -->
+        <footer class="bg-[#2C3E50] text-white">
+            <div class="container mx-auto px-4 py-16">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+                    <div>
+                        <h3 class="font-bold text-2xl">Tu asesor | Álvaro</h3>
+                        <p class="mt-4 text-gray-400">Acompañándote en el proceso de compra o venta de tu hogar en Sevilla.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Navegación</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li>
+                                <a href="comprar.html" class="hover:text-white">Comprar</a>
+                            </li>
+                            <li>
+                                <a href="#valuation" class="hover:text-white">Vender</a>
+                            </li>
+                            <li>
+                                <a href="#services" class="hover:text-white">Servicios</a>
+                            </li>
+                            <li>
+                                <a href="blog.html" class="hover:text-white">Blog</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Contacto</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li>
+                                <a href="tel:+34000000000" class="hover:text-white">+34 697 223 944</a>
+                            </li>
+                            <li>
+                                <a href="mailto:hola@tuasesoralvaro.com" class="hover:text-white">tuasesoralvaro@gmail.com</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Ubicación</h4>
+                        <div class="rounded-lg overflow-hidden h-32">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50706.047806382536!2d-6.0251597066567015!3d37.4104496370072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd126b01cf14d359%3A0xfdf6d427569c9146!2selcuarto%20inmobiliaria%20-%20las%20golondrinas!5e0!3m2!1ses!2ses!4v1758263144697!5m2!1ses!2ses"
+                                width="600"
+                                height="450"
+                                style="border:0;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                            ></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-12 pt-8 border-t border-gray-700 text-center text-gray-500 text-sm">
+                    <p>© 2025 Tu Asesor | Álvaro. Todos los derechos reservados.</p>
+                    <p class="mt-2">
+                        <a href="privacidad.html" class="hover:text-white">Política de Privacidad</a>
+                        |
+                        <a href="aviso-legal.html" class="hover:text-white">Aviso Legal</a>
+                        |
+                        <a href="cookies.html" class="hover:text-white">Política de Cookies</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        <!-- ==== FIN PIE DE PÁGINA ==== -->
+        <!-- Nuestro JavaScript para la interactividad -->
+        <script type="module" src="assets/js/rentabilidad.js"></script>
+    </body>
+</html>

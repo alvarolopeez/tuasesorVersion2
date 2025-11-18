@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tu Asesor | Álvaro</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+        <link rel="apple-touch-icon" sizes="180x180" href="https://elcuartoinmobiliaria.com/wp-content/uploads/2025/06/cropped-Favicon-Elcuarto-1-32x32.png">
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="https://elcuartoinmobiliaria.com/wp-content/uploads/2025/06/cropped-Favicon-Elcuarto-1-32x32.png"
+        >
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="https://elcuartoinmobiliaria.com/wp-content/uploads/2025/06/cropped-Favicon-Elcuarto-1-32x32.png"
+        >
+        <link rel="manifest" href="/site.webmanifest">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+        <link rel="stylesheet" href="assets/css/index.css">
+    </head>
+    <body class="min-h-screen">
+        <div class="background-container"></div>
+        <header class="fixed top-0 left-0 right-0 z-50">
+            <div class="header-floating">
+                <nav class="glass-effect px-4 sm:px-6 py-4 flex justify-between items-center">
+                    <div class="font-bold text-xl sm:text-2xl text-white">
+                        <a href="#">Tu asesor | Álvaro</a>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-4 text-white font-semibold text-lg">
+                        <a href="comprar.html" class="nav-link">Comprar</a>
+                        <a href="valoracion.html" class="nav-link">Vender</a>
+                        <div class="relative group">
+                            <button class="nav-link flex items-center">
+                                Servicios
+                                <svg
+                                    class="w-4 h-4 ml-1"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M19 9l-7 7-7-7"
+                                    ></path>
+                                </svg>
+                            </button>
+                            <div class="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-64 hidden group-hover:block transition-all duration-300">
+                                <div class="glass-effect rounded-lg shadow-xl p-2">
+                                    <a href="#services" class="block w-full text-left px-4 py-2 rounded-md hover:bg-white/20">Nuestros Servicios</a>
+                                    <a href="plusvalia.html" class="block w-full text-left px-4 py-2 rounded-md hover:bg-white/20">Calculadora de Plusvalía</a>
+                                    <a href="rentabilidad.html" class="block w-full text-left px-4 py-2 rounded-md hover:bg-white/20">Calculadora de Rentabilidad</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="blog.html" class="nav-link">Blog</a>
+                    </div>
+                    <div class="hidden md:block">
+                        <a href="contacto.html" class="btn btn-primary">Contáctanos</a>
+                    </div>
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="text-white text-3xl">☰</button>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <div id="mobile-menu" class="hidden fixed inset-0 z-[60]">
+            <div class="glass-effect w-full h-full flex flex-col items-center justify-center">
+                <button id="close-menu-button" class="absolute top-6 right-6 text-white text-4xl">×</button>
+                <a href="comprar.html" class="nav-link text-3xl text-white my-4">Comprar</a>
+                <a href="index.html#valuation" class="nav-link text-3xl text-white my-4">Vender</a>
+                <div class="text-center">
+                    <a href="#services" class="nav-link text-3xl text-white my-4 block">Servicios</a>
+                    <a href="plusvalia.html" class="text-xl text-white my-2 block hover:underline">Calculadora de Plusvalía</a>
+                    <a href="rentabilidad.html" class="text-xl text-white my-2 block hover:underline">Calculadora de Rentabilidad</a>
+                </div>
+                <a href="contacto.html" class="nav-link text-3xl text-white my-4">Contacto</a>
+                <a href="blog.html" class="nav-link text-3xl text-white my-4">Blog</a>
+            </div>
+        </div>
+        <main>
+            <section class="hero-bg h-screen w-full flex items-end justify-center">
+                <div class="glass-effect text-white text-center p-6 md:p-12 mb-20 mx-4 max-w-3xl">
+                    <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold font-montserrat">Tu casa,
+                        <br>mi prioridad.
+                    </h1>
+                    <p class="mt-4 text-md sm:text-lg md:text-xl max-w-xl mx-auto">Te acompañaré en cada paso para vender o encontrar tu hogar ideal en Sevilla.</p>
+                    <div class="mt-8 flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="valoracion.html" class="btn btn-primary w-full sm:w-auto">Vender</a>
+                        <a href="comprar.html" class="btn btn-primary w-full sm:w-auto">Comprar</a>
+                    </div>
+                </div>
+            </section>
+            <section class="py-16 sm:py-24">
+                <div class="container mx-auto px-4">
+                    <div class="glass-effect p-8 md:p-12 max-w-4xl mx-auto">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                            <div class="flex justify-center md:col-span-1">
+                                <img src="./assets/images/que-ver-en-sevilla-optimizada.webp" alt="Foto de Álvaro, asesor inmobiliario" class="rounded-full w-48 h-48 sm:w-56 sm:h-56 object-cover border-4 border-white">
+                            </div>
+                            <div class="md:col-span-2 text-white">
+                                <h2 class="text-3xl sm:text-4xl font-bold mb-4">Un asesor de confianza a tu lado</h2>
+                                <p class="text-lg mb-6">Mi nombre es Álvaro, asesor en ElCuarto Inmobiliaria y mi pasión es conectar personas con sus hogares soñados. Descubre cómo mi enfoque cercano y mi profundo conocimiento del mercado sevillano pueden ayudarte.</p>
+                                <div id="expandable-content" class="expandable-content space-y-4 text-lg">
+                                    <p>Entiendo que comprar o vender una propiedad es una de las decisiones más importantes de tu vida, y por eso mi compromiso es ofrecerte un servicio transparente y totalmente personalizado.</p>
+                                    <p>Conocemos el mercado sevillano a la perfección y tenemos expertos de zona en cada rincon de Sevilla, en mi caso el barrio de la Macarena Avenidas y Renfe, Palmilla, Marañon... Resolvere tus dudas y me asegurare de que cada paso en el proceso sea claro y beneficioso para ti.</p>
+                                </div>
+                                <button id="read-more-button" class="btn btn-primary mt-6">Leer más</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="services" class="mt-20 text-center">
+                        <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-[#2C3E50]">Un Servicio Integral Pensado para Ti</h2>
+                        <p class="max-w-2xl mx-auto text-lg mb-12">Te ofrezco mucho más que una simple transacción. Mi objetivo es tu total tranquilidad y satisfacción.</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                            <div class="glass-effect p-8 service-card text-white">
+                                <div class="text-4xl mb-4">🏠</div>
+                                <h3 class="text-xl font-bold mb-2">Valoración Profesional</h3>
+                                <p>Análisis de mercado exhaustivo para asegurar que tu propiedad salga al precio correcto, maximizando tu beneficio.</p>
+                            </div>
+                            <div class="glass-effect p-8 service-card text-white">
+                                <div class="text-4xl mb-4">📸</div>
+                                <h3 class="text-xl font-bold mb-2">Fotografía y Marketing Digital</h3>
+                                <p>Reportajes fotográficos de alta calidad y estrategias de marketing online para que tu inmueble destaque sobre los demás.</p>
+                            </div>
+                            <div class="glass-effect p-8 service-card text-white">
+                                <div class="text-4xl mb-4">💼</div>
+                                <h3 class="text-xl font-bold mb-2">Asesoramiento Legal y Financiero</h3>
+                                <p>Te acompaño en cada paso, resolviendo dudas legales y ayudándote a conseguir la mejor financiación si la necesitas.</p>
+                            </div>
+                            <div class="glass-effect p-8 service-card text-white">
+                                <div class="text-4xl mb-4">📜</div>
+                                <h3 class="text-xl font-bold mb-2">Tramitación de Herencias</h3>
+                                <p>Gestiono todo el papeleo y los procesos necesarios en situaciones de herencia para facilitar la venta del inmueble.</p>
+                            </div>
+                            <div class="glass-effect p-8 service-card text-white">
+                                <div class="text-4xl mb-4">👥</div>
+                                <h3 class="text-xl font-bold mb-2">Más de 5.000 Compradores</h3>
+                                <p>Acceso a nuestra base de datos con más de 5.000 compradores activos en Sevilla, multiplicando las posibilidades de venta rápida.</p>
+                            </div>
+                            <div class="glass-effect p-8 service-card text-white">
+                                <div class="text-4xl mb-4">💰</div>
+                                <h3 class="text-xl font-bold mb-2">Financiación - Vivenia</h3>
+                                <p>Con Vivenia, financiamos tus sueños. Te ofrecemos opciones personalizadas y claras para que comprar tu nueva casa sea algo facil y sencillo.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-20 text-center">
+                        <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-[#2C3E50]">Propiedades Vendidas</h2>
+                        <p class="max-w-2xl mx-auto text-lg mb-12">Estos son algunos de los hogares que he tenido el placer de vender y en una media menor a 30 dias. Cada uno, una historia de éxito y satisfacción.</p>
+                        <div class="relative max-w-6xl mx-auto">
+                            <div class="glass-effect p-4 md:p-8 mt-8">
+                                <div class="swiper soldSwiper">
+                                    <div class="swiper-wrapper">
+                                        <div class="swiper-slide">
+                                            <div class="bg-white rounded-lg shadow-md overflow-hidden text-left property-card h-full">
+                                                <div class="relative">
+                                                    <img src="https://i.ibb.co/Fb4S5gzd/b0a6beac-6477-4376-b7d4-f2952ce9f2e3.jpg" alt="Estudio en Granate" class="w-full h-56 object-cover">
+                                                    <div class="absolute top-4 left-4 bg-[#2C3E50] text-white text-sm font-bold px-3 py-1 rounded">ALQUILADO (600€)</div>
+                                                </div>
+                                                <div class="p-6">
+                                                    <h3 class="text-xl font-bold">Estudio en Granate</h3>
+                                                    <p class="mt-2 text-gray-600">1 hab | 1 baños | 50m2</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <div class="bg-white rounded-lg shadow-md overflow-hidden text-left property-card h-full">
+                                                <div class="relative">
+                                                    <img src="https://i.ibb.co/hxgDqxCb/7b2f9997-181f-4b40-9d8b-92cedcdacc02.jpg" alt="Piso en la Palmilla" class="w-full h-56 object-cover">
+                                                    <div class="absolute top-4 left-4 bg-[#2C3E50] text-white text-sm font-bold px-3 py-1 rounded">VENDIDO (120.000€)</div>
+                                                </div>
+                                                <div class="p-6">
+                                                    <h3 class="text-xl font-bold">Piso en la Palmilla</h3>
+                                                    <p class="mt-2 text-gray-600">2 hab | 1 baños | 60m2</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <div class="bg-white rounded-lg shadow-md overflow-hidden text-left property-card h-full">
+                                                <div class="relative">
+                                                    <img src="https://i.ibb.co/fY3Dvjz6/Captura-de-pantalla-2025-09-15-234243.png" alt="Piso en las Avenidas" class="w-full h-56 object-cover">
+                                                    <div class="absolute top-4 left-4 bg-[#2C3E50] text-white text-sm font-bold px-3 py-1 rounded">VENDIDO (140.000€)</div>
+                                                </div>
+                                                <div class="p-6">
+                                                    <h3 class="text-xl font-bold">Piso en calle Aguamarina</h3>
+                                                    <p class="mt-2 text-gray-600">2 hab | 1 baño | 69m2</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <div class="bg-white rounded-lg shadow-md overflow-hidden text-left property-card h-full">
+                                                <div class="relative">
+                                                    <img src="https://i.ibb.co/2Y86bGb3/IMG-1110.jpg" alt="Piso en la Renfe" class="w-full h-56 object-cover">
+                                                    <div class="absolute top-4 left-4 bg-[#2C3E50] text-white text-sm font-bold px-3 py-1 rounded">VENDIDO (185.000€)</div>
+                                                </div>
+                                                <div class="p-6">
+                                                    <h3 class="text-xl font-bold">Piso en calle Coral</h3>
+                                                    <p class="mt-2 text-gray-600">4 hab | 1 baños | 90m2</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <div class="bg-white rounded-lg shadow-md overflow-hidden text-left property-card h-full">
+                                                <div class="relative">
+                                                    <img src="https://i.ibb.co/4kL7XGq/IMG-0865.jpg" alt="Piso en la Macarena" class="w-full h-56 object-cover">
+                                                    <div class="absolute top-4 left-4 bg-[#2C3E50] text-white text-sm font-bold px-3 py-1 rounded">VENDIDO (190.000€)</div>
+                                                </div>
+                                                <div class="p-6">
+                                                    <h3 class="text-xl font-bold">Piso Plaza Galena</h3>
+                                                    <p class="mt-2 text-gray-600">3 hab | 1 baños | 96m2</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <div class="bg-white rounded-lg shadow-md overflow-hidden text-left property-card h-full">
+                                                <div class="relative">
+                                                    <img src="https://i.ibb.co/4wCKmWK3/IMG-0869.jpg" alt="Piso en Avenidas" class="w-full h-56 object-cover">
+                                                    <div class="absolute top-4 left-4 bg-[#2C3E50] text-white text-sm font-bold px-3 py-1 rounded">VENDIDO (115.000€)</div>
+                                                </div>
+                                                <div class="p-6">
+                                                    <h3 class="text-xl font-bold">3º Planta en Cuarzo</h3>
+                                                    <p class="mt-2 text-gray-600">3 hab | 1 baños | 69m2</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="swiper-pagination"></div>
+                                </div>
+                            </div>
+                            <div class="swiper-button-prev swiper-button-custom sold-swiper-prev"></div>
+                            <div class="swiper-button-next swiper-button-custom sold-swiper-next"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="py-16 sm:py-24">
+                <div class="container mx-auto px-4">
+                    <div class="text-center">
+                        <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-[#2C3E50]">Propiedades en Venta y Alquiler</h2>
+                        <p class="max-w-2xl mx-auto text-lg mb-12">Descubre nuestra selección exclusiva de propiedades. El hogar que buscas te está esperando.</p>
+                        <div id="for-sale-carousel-container" class="hidden relative max-w-6xl mx-auto">
+                            <div class="glass-effect p-4 md:p-8 mt-8">
+                                <div class="swiper forSaleSwiper">
+                                    <div class="swiper-wrapper" id="for-sale-swiper-wrapper"></div>
+                                    <div class="swiper-pagination"></div>
+                                </div>
+                            </div>
+                            <div class="swiper-button-prev swiper-button-custom for-sale-swiper-prev"></div>
+                            <div class="swiper-button-next swiper-button-custom for-sale-swiper-next"></div>
+                        </div>
+                        <div id="no-for-sale-message" class="hidden relative max-w-6xl mx-auto">
+                            <div class="glass-effect p-8 md:p-12 mt-8">
+                                <div class="min-h-[300px] flex flex-col items-center justify-center text-center text-white">
+                                    <svg
+                                        class="w-16 h-16 text-white mb-4"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="1.5"
+                                        stroke="currentColor"
+                                    >
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m-3-1l-3-1m3 1v5.25m-3-5.25v5.25m-3-5.25v5.25m0 0h3.75m-3-7.5 3 1.636M7.5 9l3-1.091M15 9l3-1.091"/>
+                                    </svg>
+                                    <h3 class="text-2xl sm:text-3xl font-bold">¡Lo hemos vendido todo!</h3>
+                                    <p class="mt-4 text-lg max-w-lg">Nuestra cartera de propiedades activas ha volado.
+                                        <br>¡Volvemos pronto con nuevos hogares!
+                                    </p>
+                                    <p class="mt-2 text-lg font-semibold max-w-lg">¿Quieres que tu propiedad sea la próxima en volar?
+                                        <a href="#valuation" class="text-white font-bold hover:underline">Hablemos</a>.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-12">
+                            <a href="comprar.html" class="btn btn-outline inline-block">Ver catálogo completo</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="reviews" class="py-16 sm:py-24">
+                <div class="container mx-auto px-4 text-center">
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-4 text-[#2C3E50]">Lo que dicen nuestros clientes</h2>
+                    <p class="max-w-2xl mx-auto text-lg mb-12">La confianza y la satisfacción de nuestros clientes es nuestra mayor recompensa.</p>
+                    <div id="reviews-carousel-container" class="relative max-w-6xl mx-auto">
+                        <div class="swiper testimonialsSwiper">
+                            <div class="swiper-wrapper" id="reviews-swiper-wrapper"></div>
+                            <div class="swiper-pagination !bottom-0 pt-8"></div>
+                        </div>
+                        <div class="swiper-button-prev swiper-button-custom testimonials-swiper-prev"></div>
+                        <div class="swiper-button-next swiper-button-custom testimonials-swiper-next"></div>
+                    </div>
+                    <div class="mt-16">
+                        <button id="add-review-btn" class="btn btn-outline">Escribe tu propia reseña</button>
+                    </div>
+                </div>
+            </section>
+            <section id="valuation" class="py-16 sm:py-24">
+                <div class="container mx-auto px-4">
+                    <div class="max-w-4xl mx-auto text-center">
+                        <h2 class="text-3xl sm:text-4xl font-bold text-[#2C3E50]">¿Quieres vender tu casa y no sabes cuánto vale?</h2>
+                        <p class="mt-4 text-lg sm:text-xl max-w-3xl mx-auto">Solicita ahora mismo una valoración
+                            <strong>GRATUITA</strong> y te ayudaremos a darle el valor que merece.
+                        </p>
+                        <div class="mt-12">
+                            <div id="valuation-form-container" class="glass-effect p-8 md:p-12 text-left">
+                                <form id="valuation-form">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        <div>
+                                            <label for="name" class="font-semibold text-white mb-2 block">Nombre y Apellido</label>
+                                            <input
+                                                type="text"
+                                                id="name"
+                                                name="name"
+                                                class="form-input"
+                                                required
+                                            >
+                                        </div>
+                                        <div>
+                                            <label for="phone" class="font-semibold text-white mb-2 block">Número de teléfono</label>
+                                            <input
+                                                type="tel"
+                                                id="phone"
+                                                name="phone"
+                                                class="form-input"
+                                                required
+                                            >
+                                        </div>
+                                        <div class="md:col-span-2">
+                                            <label for="email" class="font-semibold text-white mb-2 block">Correo electrónico</label>
+                                            <input
+                                                type="email"
+                                                id="email"
+                                                name="email"
+                                                class="form-input"
+                                                required
+                                            >
+                                        </div>
+                                        <div>
+                                            <label for="city" class="font-semibold text-white mb-2 block">Ciudad</label>
+                                            <input
+                                                type="text"
+                                                id="city"
+                                                name="city"
+                                                class="form-input"
+                                                required
+                                            >
+                                        </div>
+                                        <div>
+                                            <label for="zipcode" class="font-semibold text-white mb-2 block">Código postal</label>
+                                            <input
+                                                type="text"
+                                                id="zipcode"
+                                                name="zipcode"
+                                                class="form-input"
+                                                required
+                                            >
+                                        </div>
+                                        <div class="md:col-span-2">
+                                            <label for="address" class="font-semibold text-white mb-2 block">Dirección del inmueble o Ref. Catastral</label>
+                                            <input
+                                                type="text"
+                                                id="address"
+                                                name="address"
+                                                class="form-input"
+                                                required
+                                            >
+                                        </div>
+                                        <div class="md:col-span-2">
+                                            <label for="description" class="font-semibold text-white mb-2 block">Breve descripción del inmueble</label>
+                                            <textarea
+                                                id="description"
+                                                name="description"
+                                                rows="4"
+                                                class="form-input"
+                                                placeholder="Ej: 3 habitaciones, 2 baños, reformado, con terraza..."
+                                            ></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="mt-8">
+                                        <button type="submit" class="btn btn-submit">Solicitar valoración</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div id="success-message" class="hidden glass-effect p-8 md:p-12 text-center text-white">
+                                <h3 class="text-3xl font-bold">¡Gracias!</h3>
+                                <p class="mt-4 text-xl">Hemos recibido tu solicitud. Me pondré en contacto contigo en menos de 24 horas para agendar la valoración.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="bg-[#2C3E50] text-white">
+            <div class="container mx-auto px-4 py-16">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+                    <div>
+                        <h3 class="font-bold text-2xl">Tu asesor | Álvaro</h3>
+                        <p class="mt-4 text-gray-400">Acompañándote en el proceso de compra o venta de tu hogar en Sevilla.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Navegación</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li>
+                                <a href="comprar.html" class="hover:text-white">Comprar</a>
+                            </li>
+                            <li>
+                                <a href="#valuation" class="hover:text-white">Vender</a>
+                            </li>
+                            <li>
+                                <a href="#services" class="hover:text-white">Servicios</a>
+                            </li>
+                            <li>
+                                <a href="blog.html" class="hover:text-white">Blog</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Contacto</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li>
+                                <a href="tel:+34000000000" class="hover:text-white">+34 697 223 944</a>
+                            </li>
+                            <li>
+                                <a href="mailto:hola@tuasesoralvaro.com" class="hover:text-white">tuasesoralvaro@gmail.com</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Ubicación</h4>
+                        <div class="rounded-lg overflow-hidden h-32">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50706.047806382536!2d-6.0251597066567015!3d37.4104496370072!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd126b01cf14d359%3A0xfdf6d427569c9146!2selcuarto%20inmobiliaria%20-%20las%20golondrinas!5e0!3m2!1ses!2ses!4v1758263144697!5m2!1ses!2ses"
+                                width="600"
+                                height="450"
+                                style="border:0;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                            ></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-12 pt-8 border-t border-gray-700 text-center text-gray-500 text-sm">
+                    <p>© 2025 Tu Asesor | Álvaro. Todos los derechos reservados.</p>
+                    <p class="mt-2">
+                        <a href="privacidad.html" class="hover:text-white">Política de Privacidad</a>
+                        |
+                        <a href="aviso-legal.html" class="hover:text-white">Aviso Legal</a>
+                        |
+                        <a href="cookies.html" class="hover:text-white">Política de Cookies</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+        <div id="cookie-banner" class="cookie-banner fixed bottom-0 left-0 right-0 w-full p-4 z-[100] transition-transform duration-500 ease-in-out transform translate-y-full">
+            <div class="glass-effect container mx-auto max-w-4xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-white text-sm text-center sm:text-left">
+                    Utilizamos cookies propias y de terceros para mejorar su experiencia en nuestro sitio web. Al continuar navegando, consideramos que acepta su uso. Puede obtener más información en nuestra
+                    <a href="cookies.html" class="font-bold underline hover:text-gray-300">Política de Cookies</a>
+                    .
+                </p>
+                <button id="accept-cookies-btn" class="bg-blue-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors flex-shrink-0">
+                    Aceptar
+                </button>
+            </div>
+        </div>
+        <div id="buyer-popup" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 popup-overlay">
+            <div class="glass-effect text-white w-full max-w-md p-8 rounded-2xl relative">
+                <button id="close-popup-btn" class="absolute top-4 right-4 text-white text-3xl">×</button>
+                <div id="popup-form-content">
+                    <h3 class="text-2xl font-bold text-center mb-2">¿Buscas tu nuevo hogar?</h3>
+                    <p class="text-center mb-6">Déjanos tus datos y sé el primero en recibir las nuevas propiedades que entren en cartera.</p>
+                    <form id="buyer-form">
+                        <div class="space-y-4">
+                            <div>
+                                <label for="popup-name" class="font-semibold mb-1 block">Nombre</label>
+                                <input
+                                    type="text"
+                                    id="popup-name"
+                                    class="form-input"
+                                    required
+                                >
+                            </div>
+                            <div>
+                                <label for="popup-phone" class="font-semibold mb-1 block">Nº de teléfono</label>
+                                <input
+                                    type="tel"
+                                    id="popup-phone"
+                                    class="form-input"
+                                    required
+                                >
+                            </div>
+                            <div>
+                                <label for="popup-email" class="font-semibold mb-1 block">Correo electrónico</label>
+                                <input
+                                    type="email"
+                                    id="popup-email"
+                                    class="form-input"
+                                    required
+                                >
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <button type="submit" class="btn btn-submit">¡Quiero enterarme!</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="popup-success-message" class="hidden text-center">
+                    <h3 class="text-3xl font-bold">¡Listo!</h3>
+                    <p class="mt-4 text-xl">Te hemos añadido a nuestra lista de compradores. ¡Estás un paso más cerca de tu nuevo hogar!</p>
+                </div>
+            </div>
+        </div>
+        <div id="review-popup" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 popup-overlay">
+            <div class="glass-effect text-white w-full max-w-md p-8 rounded-2xl relative">
+                <button id="close-review-popup-btn" class="absolute top-4 right-4 text-white text-3xl">×</button>
+                <div id="review-form-content">
+                    <h3 class="text-2xl font-bold text-center mb-2">Deja tu reseña</h3>
+                    <p class="text-center mb-6">Tu opinión nos ayuda a mejorar. ¡Gracias por tu tiempo!</p>
+                    <form id="review-form">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="font-semibold mb-2 block text-center">Tu valoración</label>
+                                <div class="flex justify-center items-center text-3xl review-form-stars flex-row-reverse">
+                                    <input
+                                        type="radio"
+                                        id="star5"
+                                        name="rating"
+                                        value="5"
+                                        class="hidden"
+                                        required
+                                    >
+                                    <label for="star5" title="5 estrellas">
+                                        <span class="star">★</span>
+                                    </label>
+                                    <input
+                                        type="radio"
+                                        id="star4"
+                                        name="rating"
+                                        value="4"
+                                        class="hidden"
+                                    >
+                                    <label for="star4" title="4 estrellas">
+                                        <span class="star">★</span>
+                                    </label>
+                                    <input
+                                        type="radio"
+                                        id="star3"
+                                        name="rating"
+                                        value="3"
+                                        class="hidden"
+                                    >
+                                    <label for="star3" title="3 estrellas">
+                                        <span class="star">★</span>
+                                    </label>
+                                    <input
+                                        type="radio"
+                                        id="star2"
+                                        name="rating"
+                                        value="2"
+                                        class="hidden"
+                                    >
+                                    <label for="star2" title="2 estrellas">
+                                        <span class="star">★</span>
+                                    </label>
+                                    <input
+                                        type="radio"
+                                        id="star1"
+                                        name="rating"
+                                        value="1"
+                                        class="hidden"
+                                    >
+                                    <label for="star1" title="1 estrella">
+                                        <span class="star">★</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="review-name" class="font-semibold mb-1 block">Tu nombre</label>
+                                <input
+                                    type="text"
+                                    id="review-name"
+                                    class="form-input"
+                                    required
+                                >
+                            </div>
+                            <div>
+                                <label for="review-text" class="font-semibold mb-1 block">Tu experiencia</label>
+                                <textarea
+                                    id="review-text"
+                                    rows="4"
+                                    class="form-input"
+                                    placeholder="Cuéntanos cómo te hemos ayudado..."
+                                    required
+                                ></textarea>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <button type="submit" class="btn btn-submit">Enviar reseña</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="review-success-message" class="hidden text-center">
+                    <h3 class="text-3xl font-bold">¡Gracias por tu reseña!</h3>
+                    <p class="mt-4 text-xl">La revisaremos y publicaremos pronto. Tu opinión es muy valiosa para nosotros.</p>
+                </div>
+            </div>
+        </div>
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script type="module" src="assets/js/index.js"></script>
+    </body>
+</html>
